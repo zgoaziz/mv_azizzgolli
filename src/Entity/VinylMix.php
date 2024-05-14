@@ -6,6 +6,11 @@ use App\Repository\VinylMixRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+
+
+#[ORM\Column(length: 100, unique: true)]
+#[Slug(fields: ['title'])]
+private ?string $slug = null;
 #[ORM\Entity(repositoryClass: VinylMixRepository::class)]
 class VinylMix
 {
@@ -31,6 +36,9 @@ class VinylMix
 
     #[ORM\Column]
     private int $votes = 0;
+
+    #[ORM\Column(length: 100)]
+    private ?string $slug = null;
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -132,5 +140,17 @@ class VinylMix
     public function downvote(): void
     {
         $this->votes--;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }

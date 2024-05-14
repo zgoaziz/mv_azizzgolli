@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-
+show() : #[Route('/mix/{slug}', name: 'app_mix_show')]
 class MixController extends AbstractController
 {
     #[Route('/mix/new', name: 'app_mix')]
@@ -24,7 +24,8 @@ class MixController extends AbstractController
         $entityManager->flush();
         return new Response(sprintf(
             'Mix %d is %d tracks of pure 80\'s heaven',
-            $mix->getId(),
+            'slug' => $mix->getSlug(),
+            slug: mix.slug,
             $mix->getTrackCount()
         ));
     }
