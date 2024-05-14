@@ -39,6 +39,8 @@
 				{% endfor %}
 			</div>
 		</div>
-
-	</div>
-{% endblock %}
+	{% endfor %}
+	{% if pager.hasNextPage %}
+		<turbo-frame id="mix-browse-list-{{ pager.nextPage }}" src="{{ pagerfanta_page_url(pager, pager.nextPage) }}" loading="lazy"></turbo-frame>
+	{% endif %}
+</div>{% endblock %}
